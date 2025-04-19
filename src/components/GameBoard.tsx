@@ -1,17 +1,32 @@
+import Lottie from "lottie-react";
+import crossData from '../assets/animations/cross.json';
+import gridData from '../assets/animations/grid.json';
+import ovalData from '../assets/animations/oval.json';
+
+
 
 export type CellValue = 'X' | 'O' | null;
+
 
 export interface GameBoardProps {
     board: CellValue[];
     onCellClick: (index: number) => void;
     isGameOver: boolean;
     resetGame?: () => void;
-    winner: string;
 }
 
 const GameBoard: React.FC<GameBoardProps>= ({board, onCellClick, isGameOver = false}) => {
     return (
+        <>
+        <Lottie
+                    animationData={gridData}
+                    loop = {false}
+                    height={30}
+                    width={30}
+                    className="grid-board"
+                    ></Lottie>
         <div className="game-board">
+            
             {board.map((value, index) =>(
                 <button
                 key={index}
@@ -23,12 +38,20 @@ const GameBoard: React.FC<GameBoardProps>= ({board, onCellClick, isGameOver = fa
                 }}
                 disabled={isGameOver || value !== null}
                 >
-                    {value}
+                   
+                    <Lottie
+                    animationData={value === 'O' ? ovalData : (value === 'X' ? crossData : "")}
+                    loop = {false}
+                    height={30}
+                    width={30}
+                    ></Lottie>
                 </button>
+                
             ))
 
             }
         </div>
+        </>
     )
 }
 
