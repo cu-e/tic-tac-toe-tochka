@@ -1,0 +1,185 @@
+
+@font-face {
+  font-family: "dendy";          
+  src: url('/src/assets/fonts/dendy.woff2')
+       format("woff2");            
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'dendy';
+}
+body{
+  margin: auto;
+  background-size: cover;
+
+}
+.img-back{
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+.grid-board{
+  position: absolute;
+}
+
+.game-board {
+
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  gap: 0px;
+}
+.gameplay-container {
+  position: absolute;
+  top: 19.5%;
+  left: 18%;
+  width: 29%;
+  height: 32%;
+  background: url(/src/assets/images/gameplay_background.webp);
+  filter: brightness(1.2) blur(0.6px) contrast(1.2);
+  background-size: cover;
+  border-radius: 2px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.7),
+    /* блик сверху */
+    inset 0 40px 40px rgba(255, 255, 255, 0.3),
+    /* тень снизу */
+    inset 0 -40px 40px rgba(0, 0, 0, 0.8);
+}
+
+.gameplay-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.123)0%,
+    transparent 60%
+  );
+}
+
+.gameplay-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+
+.tv-light {
+  box-shadow: 1px 1px 3px 2px rgba(164, 183, 231, 0.6) inset;
+  position: absolute;
+  margin: 0 auto;
+  width: 99%; height: 99%;
+  pointer-events: none;   
+  z-index: 999;   
+  background: linear-gradient(45deg, #35353528, #ffffff3c);
+  background-size: 10% 10%;
+  animation: loading-animation 30s ease infinite;
+  border-radius: 2px;
+
+  margin: -10px;
+
+}
+.cell {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.cell:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+
+@keyframes loading-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.menu-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  background-color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  filter: brightness(1.2) blur(0.4px);
+
+
+  color: white;
+}
+.muted-text{
+  color: lightslategray;
+}
+.start-btn{
+  background-color: transparent;
+  border: transparent;
+  color: aqua;
+  cursor: pointer;
+
+  font-size: xx-large;
+}
+.border-info-gui{
+  background: black;
+  color:rgb(237, 229, 127);
+  border: rgb(237, 229, 127) 2px solid;
+  padding: 4px;
+  font-size: small;
+  opacity: 0.7;
+}
+.info-gui{
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+
+}
+/* TODO: сделать адаптацию для мобильных устройств */
+/* @media (max-height: 940px) {
+} */
