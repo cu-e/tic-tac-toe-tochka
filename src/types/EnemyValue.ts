@@ -1,0 +1,1 @@
+export type EnemyValue = 'bot' | '1MonitorGames';
