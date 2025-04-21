@@ -158,14 +158,18 @@ body{
 .muted-text{
   color: lightslategray;
 }
+.contrast-color{
+  color: #a777ff;
+}
 .start-btn{
   background-color: transparent;
   border: transparent;
-  color: aqua;
+  color: #a777ff;
   cursor: pointer;
 
   font-size: xx-large;
 }
+
 .border-info-gui{
   background: black;
   color:rgb(237, 229, 127);
