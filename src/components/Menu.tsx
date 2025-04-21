@@ -1,17 +1,18 @@
 import React from 'react';
 import { useGameStats } from '../hooks/useGameStats';
+import { EnemyValue } from '../types/EnemyValue';
 
 interface MenuProps {
   tracks: { id: string; label: string; src: string }[];
-  emeny: {id: string; label: string}[];
+  enemy: {id: string; label: string}[];
   selectedTrack: string;
   onSelectTrack: (id: string) => void;
-  selectedEmeny: string;
-  onSelectEmeny: (id: string) => void;
+  selectedEnemy: EnemyValue;
+  onSelectEnemy: (id: EnemyValue) => void;
   onStart: () => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ tracks, emeny, selectedTrack, onSelectTrack, selectedEmeny, onSelectEmeny, onStart }) => {
+const Menu: React.FC<MenuProps> = ({ tracks, enemy, selectedTrack, onSelectTrack, selectedEnemy, onSelectEnemy, onStart }) => {
     const {totalGames, winsX, winsO, allX, allO} = useGameStats();
     
     return(
@@ -29,17 +30,27 @@ const Menu: React.FC<MenuProps> = ({ tracks, emeny, selectedTrack, onSelectTrack
         <br/><br/>
       <h2>Музыка</h2>
       {tracks.map(t => (
-        <div>
-          <input type='radio' key={t.id} id={t.id} value={t.id} name='tracks' onChange={e => onSelectTrack(e.target.value)}   defaultChecked={t.id === selectedTrack}></input>
+        <div key={t.id}>
+          <input type='radio'
+          id={t.id}
+          value={t.id}
+          name='tracks'
+          onChange={e => onSelectTrack(e.target.value)}
+          defaultChecked={t.id === selectedTrack}></input>
           <label htmlFor={t.id}>{t.label}</label>
           </div>
         ))}
         <br/><br/>
         <h2>Противник</h2>
-        {emeny.map(e => (
-            <div>
-                <input type='radio' key={e.id} id={e.id} value={e.id} name='emeny' onChange={e => onSelectEmeny(e.target.value)}   defaultChecked={e.id === selectedEmeny}></input>
-                <label htmlFor={e.id}>{e.label}</label>
+        {enemy.map(e => (
+            <div key={e.id}>
+                <input type='radio'
+                id={e.id}
+                value={e.id}
+                name='emeny'
+                onChange={e => onSelectEnemy(e.target.value as EnemyValue)}
+                defaultChecked={e.id === selectedEnemy}></input>
+                <label htmlFor={e.id}>{e.label} </label>
             </div>
         ))}
         
