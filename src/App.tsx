@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import background from './assets/images/background.webp';
+import track3 from './assets/sounds/deoxys-beats-simply-me.mp3';
+import track1 from './assets/sounds/joshua-mclean-mountain-trials.mp3';
+import track2 from './assets/sounds/walen-gameboy.mp3';
 import GameBoard from './components/GameBoard';
 import InfoPanel from './components/InfoPanel';
 import Menu from './components/Menu';
 import Result from './components/Result';
 import useGame from './hooks/useGame';
 import { EnemyValue } from './types/EnemyValue';
-
 
 
 interface EnemyProps{
@@ -17,9 +20,9 @@ interface TracksProps{
 }
 
 const TRACKS : TracksProps[]= [
-  { id: "track1", label: 'Mountain Trials', src: '/src/assets/sounds/joshua-mclean-mountain-trials.mp3' },
-  { id: "track2", label: 'Walen Gameboy', src: '/src/assets/sounds/walen-gameboy.mp3' },
-  { id: "track3", label: 'Deoxys Beats simply-me', src: '/src/assets/sounds/deoxys-beats-simply-me.mp3' },
+  { id: "track1", label: 'Mountain Trials', src: track1 },
+  { id: "track2", label: 'Walen Gameboy', src: track2 },
+  { id: "track3", label: 'Deoxys Beats simply-me', src: track3 },
 ];
 
 const ENEMY: EnemyProps[] = [
@@ -116,7 +119,7 @@ function App() {
 
           <div className="tv-light" />
         </div>
-        <img src='/src/assets/images/background.webp' className='img-back'></img>
+        <img src={background} className='img-back'></img>
       </>
       ): (<>
       <Result winner={winner} onMenu={handleMenu}        
