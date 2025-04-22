@@ -9,6 +9,7 @@
 }
 
 *{
+  -webkit-tap-highlight-color:transparent;
   margin: 0;
   padding: 0;
   font-family: 'dendy';
@@ -23,16 +24,34 @@ body{
   width: 100vw;
   height: 100vh;
   z-index: -1;
+  content: url("./assets/images/background.webp");
 }
 .grid-board{
   position: absolute;
 }
 
 .game-board {
-
+  margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(3, 60px);
   gap: 0px;
+}
+.cell {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.cell:disabled {
+  cursor: not-allowed;
+  opacity: 1;
 }
 .gameplay-container {
   position: absolute;
@@ -41,7 +60,6 @@ body{
   width: 29%;
   height: 32%;
   background: url(/src/assets/images/gameplay_background.webp);
-  filter: brightness(1.2) blur(0.6px) contrast(1.2);
   background-size: cover;
   border-radius: 2px;
 
@@ -76,6 +94,7 @@ body{
 }
 
 .gameplay-container::after {
+  
   content: "";
   position: absolute;
   top: 0;
@@ -93,6 +112,7 @@ body{
 
 
 .tv-light {
+  filter: brightness(1.2) blur(0.6px) contrast(1.2);
   box-shadow: 1px 1px 3px 2px rgba(164, 183, 231, 0.6) inset;
   position: absolute;
   margin: 0 auto;
@@ -107,23 +127,6 @@ body{
   margin: -10px;
 
 }
-.cell {
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  cursor: pointer;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.6;
-}
-
-.cell:disabled {
-  cursor: not-allowed;
-  opacity: 1;
-}
 
 
 @keyframes loading-animation {
@@ -137,7 +140,6 @@ body{
     background-position: 0% 50%;
   }
 }
-
 .menu-overlay{
   position: absolute;
   left: 0;
@@ -170,7 +172,12 @@ body{
 
   font-size: xx-large;
 }
+.info-gui{
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
 
+}
 .border-info-gui{
   background: black;
   color:rgb(237, 229, 127);
@@ -179,12 +186,70 @@ body{
   font-size: small;
   opacity: 0.7;
 }
-.info-gui{
-  display: flex;
-  justify-content: space-between;
-  width: 95%;
-
-}
 /* TODO: сделать адаптацию для мобильных устройств */
-/* @media (max-height: 940px) {
-} */
+@media (max-width: 940px) {
+  .img-back{
+    position: fixed;
+    object-fit: cover;
+    z-index: -1;
+    transform: scale(1.2);
+    transform-origin: center center;
+    pointer-events: none; 
+    content: url("./assets/images/mobile-background.webp");
+  }
+  .gameplay-container {
+    position: absolute;
+    top: 28%;
+    left: 14.2%;
+    width: 68.4%;
+    height: 23%;
+    filter: none;
+  }
+  .info-gui{
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    width: 100vw;  
+  }
+  .border-info-gui{
+    padding: 4px;
+    font-size:larger;
+    opacity: 0.7;
+  }
+  .grid-board{
+    width: 200px;
+    height: 200px;
+  }
+
+  .game-board {
+    grid-template-columns: repeat(3, 60px);
+  }
+  .cell {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (max-height: 700px) {
+  .gameplay-container {
+    top: 28%;
+    left: 20.2%;
+    width: 55.4%;
+    height: 22.2%;
+  }
+  .grid-board{
+    width: 150px;
+    height: 150px;
+  }
+
+  .game-board {
+    grid-template-columns: repeat(3, 40px);
+  }
+  .cell {
+    width: 40px;
+    height: 40px;
+  }
+  .chip{
+    width: 25px;
+    height: 25px;
+  }
+}
