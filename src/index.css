@@ -20,6 +20,9 @@ body{
   background-size: cover;
 
 }
+h1{
+  font-size: 1.8em;
+}
 .img-back{
   width: 100vw;
   height: 100vh;
@@ -142,6 +145,7 @@ body{
 }
 .menu-overlay{
   position: absolute;
+  padding: 20px;
   left: 0;
   right: 0;
   top: 0;
