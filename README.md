@@ -1,6 +1,7 @@
 # Крестики - нолики
 Тестовое задание на стажировку frontend-разработчика
 
+Демо: [tic-tac-toe-tochka.toropov.dev](https://tic-tac-toe-tochka.toropov.dev/)
 ---
 
 ### Описание
@@ -62,10 +63,13 @@ tic-tac-toe-tochka/
    npm run build
    ```
 
-1. Запуск с Docker:
+(необходимо настроить обратный прокси или откатиться на этот [коммит](https://github.com/cu-e/tic-tac-toe-tochka/commit/1d4cc20db4b6825d2019c3e2ee2c653c7598d6e1)
+)
+1. Запуск с Docker: 
    ```bash
    docker-compose up --build
    ```
+
 
 ---
 
