@@ -26,11 +26,13 @@ const useGame = () : UseGameResult => {
 
     const onCellClick = (index : number) =>{
         const newCells = [...cells];
+        newCells[index] = currentPlayer;
+        if (finishGame(newCells)) return;
 
         switch (enemy) {
             case 'bot':
                 newCells[index] = currentPlayer;
-
+                finishGame(newCells);
                     {
                         const allowIndex = newCells.reduce<number[]>((acc, e, idx) =>{
                             if (e === null) acc.push(idx);
@@ -40,9 +42,7 @@ const useGame = () : UseGameResult => {
                         newCells[allowIndex[Math.floor(Math.random() * allowIndex.length)]] = 'O';
 
                     }
-
                     setCells(newCells);
-                    
                 break;
             case '1MonitorGames':
                     newCells[index] = currentPlayer;
@@ -52,31 +52,31 @@ const useGame = () : UseGameResult => {
                     
                 break;
         }
-
-
-
-        // Ничья
+        
+        finishGame(newCells);
+    };
+    const finishGame = (newCells: CellValue[]) => {
+         // Ничья
         if(newCells.every((e) => e !== null)){
             setWinner(null)
             registerGame(null, newCells.filter(e => e === 'X').length, newCells.filter(e => e === 'O').length)
             setGameOver(true);
+            return true;
         }
-        
-        // Победа
-        const calcWinner = calculateWinner(newCells);
-        if (calcWinner[1]) {
-            const winCells : CellValue[] = Array(9).fill(null);
-            newCells.map((a, index) => {
-                if(calcWinner[1]?.includes(index as never)){
-                    winCells[index] = a
-                }
-            })
-            setWinner(calcWinner[0] as CellValue)
-            registerGame(currentPlayer, newCells.filter(e => e === 'X').length, newCells.filter(e => e === 'O').length)
-            setCells(winCells);
-            setGameOver(true);
-        }
-    };
+         // Победа / Продолжить игру
+        const [winnerSymbol, winCells] = calculateWinner(newCells);
+        if (!winnerSymbol) return false;
+      
+        setWinner(winnerSymbol);
+        registerGame(
+          winnerSymbol,
+          newCells.filter(e => e === 'X').length,
+          newCells.filter(e => e === 'O').length
+        );
+        setCells(winCells);
+        setGameOver(true);
+        return true;
+      };      
     const resetGame = (enemy: EnemyValue) => {
         setCells(Array(9).fill(null));
         setEnemy(enemy);
@@ -89,24 +89,22 @@ const useGame = () : UseGameResult => {
 
 export default useGame;
 
-const calculateWinner = (cells : CellValue[]) => {
+const calculateWinner = (cells: CellValue[]): [CellValue, CellValue[]] => {
     const lines = [
-        [0, 1, 2], // Первая строка
-        [3, 4, 5], // Вторая строка
-        [6, 7, 8], // Третья строка
-        [0, 3, 6], // Первый столбец
-        [1, 4, 7], // Второй столбец
-        [2, 5, 8], // Третий столбец
-        [0, 4, 8], // Диагональ слева‑направо
-        [2, 4, 6], // Диагональ справа‑налево
-      ];
-    
-      for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-          return [cells[a], lines[i]];
-        }
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6],
+    ];
+  
+    for (const [a,b,c] of lines) {
+      if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+        const winner = cells[a];
+        const winCells = Array(9).fill(null).map((_, idx) =>
+          (idx === a || idx === b || idx === c) ? cells[idx] : null
+        );
+        return [winner, winCells];
+      }
     }
-    
-      return [null, null];
-};
+  
+    return [null, []];
+  };
