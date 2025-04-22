@@ -42,8 +42,7 @@ const GameBoard: React.FC<GameBoardProps>= ({board, onCellClick, isGameOver = fa
                     <Lottie
                     animationData={value === 'O' ? ovalData : (value === 'X' ? crossData : "")}
                     loop = {false}
-                    height={30}
-                    width={30}
+                    className="chip"
                     ></Lottie>
                 </button>
                 

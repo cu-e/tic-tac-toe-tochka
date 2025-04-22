@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import background from './assets/images/background.webp';
 import track3 from './assets/sounds/deoxys-beats-simply-me.mp3';
 import track1 from './assets/sounds/joshua-mclean-mountain-trials.mp3';
 import track2 from './assets/sounds/walen-gameboy.mp3';
@@ -119,7 +118,7 @@ function App() {
 
           <div className="tv-light" />
         </div>
-        <img src={background} className='img-back'></img>
+        <img className='img-back'></img>
       </>
       ): (<>
       <Result winner={winner} onMenu={handleMenu}        
