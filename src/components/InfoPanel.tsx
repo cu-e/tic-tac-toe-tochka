@@ -18,7 +18,6 @@ const InfoPanel : React.FC<InfoPanelProps> = ({winner, isGameOver, currentPlayer
     }, [])
 
     return(
-        <>
         <div className="info-gui">
         <div className="border-info-gui">
             <p>{winner}</p>
@@ -28,17 +27,6 @@ const InfoPanel : React.FC<InfoPanelProps> = ({winner, isGameOver, currentPlayer
 
         <div className="border-info-gui"><p>Время {sec}</p></div>
         </div>
-
-                <div className="info-gui-mobile">
-        <div className="border-info-gui">
-            <p>{winner}</p>
-            <p>{isGameOver}</p>
-            <p>Сейчас ходит {currentPlayer}</p>
-        </div>
-
-        <div className="border-info-gui"><p>Время {sec}</p></div>
-        </div>
-        </>
     );
 }
 
