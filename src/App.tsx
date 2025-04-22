@@ -59,7 +59,7 @@ function App() {
             return;
           }
           currentStep++;
-          const newVolume = Math.max(0, 1 - currentStep / fadeSteps);
+          const newVolume = Math.max(0, 0.1 - currentStep / fadeSteps);
           audio.volume = newVolume;
   
           if (currentStep >= fadeSteps) {
@@ -79,7 +79,7 @@ function App() {
     resetGame(selectedEmeny);
     setMenuVisible(false);
     if (audioRef.current) {
-      audioRef.current.volume = 1;
+      audioRef.current.volume = 0.7;
       audioRef.current.play();
     }
   };
